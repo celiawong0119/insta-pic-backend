@@ -1,0 +1,35 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "username": "Tom",
+      "password": "$2b$10$PVBRW753vMgju/lSjntcR.PkwsRUOHUpENVhtdENpZoKIao74VRjK",
+      "posts": []
+    },
+    {
+      "id": 2,
+      "username": "Tom2",
+      "password": "$2b$10$ggrA1U5/8YZMviC7u1aKd.9oMVnxEmrpUnXpgdZqeLAQL.3GL19Fi",
+      "posts": []
+    },
+    {
+      "id": 3,
+      "username": "Tom3",
+      "password": "$2b$10$Xumy6/ljba50qJI4Y1rkKO6c7N0215HMs9JXLrf457w0oW6HKKs6.",
+      "posts": []
+    },
+    {
+      "id": 4,
+      "username": "Hugo",
+      "password": "$2b$10$8j3JIFLVdoWut7ekdVNl/OLY90O5sKMs6D1YRIoyqbIovIDEvODEO",
+      "posts": []
+    },
+    {
+      "id": 5,
+      "username": "Hugo2",
+      "password": "$2b$10$eLK/dwXBsrmLEVzhVLPhpeYking1UqPg03TND1jge/cR85zK5rJue",
+      "posts": []
+    }
+  ],
+  "posts": [{ "id": 1, "imageName": "1_iconGoogle.png", "createdTime": 1635097441 }]
+}
