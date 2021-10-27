@@ -1,1 +1,11 @@
-{"users":[{"id":1,"username":"Tom","password":"$2b$10$PVBRW753vMgju/lSjntcR.PkwsRUOHUpENVhtdENpZoKIao74VRjK","posts":[]},{"id":2,"username":"Tom2","password":"$2b$10$ggrA1U5/8YZMviC7u1aKd.9oMVnxEmrpUnXpgdZqeLAQL.3GL19Fi","posts":[]},{"id":3,"username":"Tom3","password":"$2b$10$Xumy6/ljba50qJI4Y1rkKO6c7N0215HMs9JXLrf457w0oW6HKKs6.","posts":[]},{"id":4,"username":"Hugo","password":"$2b$10$8j3JIFLVdoWut7ekdVNl/OLY90O5sKMs6D1YRIoyqbIovIDEvODEO","posts":[]},{"id":5,"username":"Hugo2","password":"$2b$10$eLK/dwXBsrmLEVzhVLPhpeYking1UqPg03TND1jge/cR85zK5rJue","posts":[]},{"id":6,"username":"Andus","password":"$2b$10$Ry/Sxelfbizd5N2gwXKP2O0hc/Dz4wXcWhO3fq8L82O6z6WG0pyGq","posts":[]},{"id":7,"username":"Jane","password":"$2b$10$qx4TmRUoKu36lGvDtWUdOu.OvEaQnN6JCx2Iz08wj4BC/cij4WU82","posts":[]}],"posts":[{"id":1,"imageName":"1_iconGoogle.png","createdTime":1635097441}]}
+{
+  "users": [
+    {
+      "id": 1,
+      "username": "Tom",
+      "password": "$2b$10$PVBRW753vMgju/lSjntcR.PkwsRUOHUpENVhtdENpZoKIao74VRjK",
+      "posts": []
+    }
+  ],
+  "posts": []
+}
