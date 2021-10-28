@@ -5,7 +5,28 @@
       "username": "Tom",
       "password": "$2b$10$PVBRW753vMgju/lSjntcR.PkwsRUOHUpENVhtdENpZoKIao74VRjK",
       "posts": []
+    },
+    {
+      "id": 2,
+      "username": "Andus",
+      "password": "$2b$10$Q6lrnQkowHMJcMOBdNVMw.fRyJQ4vA3MOb6r82qIzM.ZhWhHcBfCC",
+      "posts": [2, 1]
     }
   ],
-  "posts": []
+  "posts": [
+    {
+      "id": 2,
+      "imageName": "1635452075581-Howl's Moving Castle.jpg",
+      "caption": "dqwdqqdf",
+      "createdTime": 1635452060,
+      "author": { "userId": 2, "name": "Andus" }
+    },
+    {
+      "id": 1,
+      "imageName": "1635452060169-Avatar1.jpg",
+      "caption": "dqwdq",
+      "createdTime": 1635451941,
+      "author": { "userId": 2, "name": "Andus" }
+    }
+  ]
 }

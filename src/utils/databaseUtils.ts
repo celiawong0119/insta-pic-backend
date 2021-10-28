@@ -5,7 +5,7 @@ import database from '../database/database.json';
 
 interface IDatabase {
   users: IUser[];
-  posts: IPost[];
+  posts: Post[];
 }
 export const getDatabase = (): IDatabase => {
   return database;

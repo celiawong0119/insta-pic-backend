@@ -8,7 +8,6 @@ import {
   getExpireDateInUnixTimeFormat,
 } from '../../utils/authUtils';
 import { getDatabase, writeToDatabase } from '../../utils/databaseUtils';
-import verifyJwt from '../../middlewares/verifyJwt';
 
 interface AuthPayload {
   username: string;

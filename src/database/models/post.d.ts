@@ -1,6 +1,7 @@
-interface IPost {
+interface Post {
   id: number;
-  imageFile: File;
+  imageName: string;
   caption: string;
   createdTime: number;
+  author: { userId: number; name: string };
 }
