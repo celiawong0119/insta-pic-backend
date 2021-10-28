@@ -1,5 +1,6 @@
 import express from 'express';
 import multer from 'multer';
+import path from 'path';
 
 import { findUserByUserId } from '../../services/findUser';
 import {
@@ -37,7 +38,24 @@ router.post('/upload-image', (req: express.Request, res: express.Response) => {
     if (err) {
       return res.status(500);
     }
-    return res.status(200).send(req.file?.filename);
+
+    // file should exist
+    if (!req.file) {
+      return res.status(422);
+    }
+
+    // file should be smaller than 2MB (2097152 bytes)
+    if (req.file!.size > 2097152) {
+      return res.status(422);
+    }
+
+    // file should contain image extensions
+    const fileExtension = path.extname(req.file!.filename).split('.').pop();
+    if (!fileExtension || !['jpg', 'jpeg', 'png', 'svg'].includes(fileExtension!)) {
+      return res.status(422);
+    }
+    console.log(fileExtension);
+    return res.status(200).send(req.file!.filename);
   });
 });
 
@@ -76,7 +94,6 @@ router.post(
       writeToDatabase(JSON.stringify(database));
       res.status(200).send({ newPostId: newPost.id });
     } catch (e) {
-      console.log(e);
       res.status(500).send();
     }
   }
@@ -92,10 +109,8 @@ router.get(
       const database = getDatabase();
       if (userId) {
         const foundUser = findUserByUserId(parseInt(userId));
-        console.log(foundUser);
         if (foundUser) {
           const filteredPosts = database.posts.filter((post) => foundUser.posts.includes(post.id));
-          console.log(sortByTime);
           const sortedPosts =
             sortByTime === 'asc'
               ? filteredPosts.sort((a: Post, b: Post) => a.createdTime - b.createdTime)
