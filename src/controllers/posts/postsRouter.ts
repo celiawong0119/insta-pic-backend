@@ -1,5 +1,6 @@
 import express from 'express';
 
+import { findUserByUserId } from '../../services/findUser';
 import {
   getDatabase,
   writeToDatabase,
@@ -19,6 +20,7 @@ router.post(
   async (req: express.Request<never, never, PostPayload, never>, res: express.Response) => {
     try {
       const { userId, imageFile, caption } = req.body;
+
       const database = getDatabase();
 
       if (!imageFile || !caption) {
@@ -26,7 +28,8 @@ router.post(
         return;
       }
 
-      const foundUser = database.users.find((user) => user.id === userId);
+      const foundUser = findUserByUserId(userId);
+
       if (!foundUser) {
         res.status(422).send();
         return;

@@ -1,4 +1,5 @@
 import express from 'express';
+import verifyJwt from '../middlewares/verifyJwt';
 
 import authRouter from './auth/authRouter';
 import postsRouter from './posts/postsRouter';
@@ -7,7 +8,7 @@ import postsRouter from './posts/postsRouter';
 const apiRouter = express.Router();
 
 apiRouter.use('/auth', authRouter);
-apiRouter.use('/posts', postsRouter);
+apiRouter.use('/posts', verifyJwt, postsRouter);
 // apiRouter.use('/users', userRouter);
 
 export default apiRouter;

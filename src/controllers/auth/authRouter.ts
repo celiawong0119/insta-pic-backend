@@ -1,13 +1,14 @@
 import express from 'express';
 import jwt from 'jsonwebtoken';
 
-import findUserByUsername from '../../services/findUserByUsername';
+import { findUserByUsername, findUserByUserId } from '../../services/findUser';
 import {
   generateHashedPassword,
   verifyPassword,
-  expireDateInUnixTimeFormat,
+  getExpireDateInUnixTimeFormat,
 } from '../../utils/authUtils';
 import { getDatabase, writeToDatabase } from '../../utils/databaseUtils';
+import verifyJwt from '../../middlewares/verifyJwt';
 
 interface AuthPayload {
   username: string;
@@ -28,7 +29,7 @@ type ErrorResponse = string;
 
 const router = express.Router();
 
-const JWTKey = 'JWTKey_insta_pic';
+export const JWTKey = 'JWTKey_insta_pic';
 
 router.post(
   '/login',
@@ -43,15 +44,13 @@ router.post(
       if (foundUser) {
         // user is found
         if (await verifyPassword(password, foundUser.password)) {
-          const jwtToken = jwt.sign(
-            { id: foundUser.id, jwtTokenExpires: expireDateInUnixTimeFormat },
-            JWTKey
-          );
+          const exp = getExpireDateInUnixTimeFormat();
+          const jwtToken = jwt.sign({ id: foundUser.id, exp: exp }, JWTKey);
 
           // password match
           res.status(200).send({
             jwtToken: jwtToken,
-            jwtTokenExpires: expireDateInUnixTimeFormat,
+            jwtTokenExpires: exp,
             data: { id: foundUser.id, username: foundUser.username, posts: foundUser.posts },
           });
         } else {
@@ -96,14 +95,12 @@ router.post(
         database.users.push(newUser);
         writeToDatabase(JSON.stringify(database));
 
-        const jwtToken = jwt.sign(
-          { id: newUser.id, jwtTokenExpires: expireDateInUnixTimeFormat },
-          JWTKey
-        );
+        const exp = getExpireDateInUnixTimeFormat();
+        const jwtToken = jwt.sign({ id: newUser.id, exp: exp }, JWTKey);
 
         res.status(200).send({
           jwtToken: jwtToken,
-          jwtTokenExpires: expireDateInUnixTimeFormat,
+          jwtTokenExpires: exp,
           data: { id: newUser.id, username: newUser.username, posts: newUser.posts },
         });
       }
@@ -113,4 +110,32 @@ router.post(
   }
 );
 
+router.post(
+  '/verifyToken',
+  async (req: express.Request, res: express.Response<AuthResponse | ErrorResponse>) => {
+    try {
+      const token = req.headers['x-auth-token'] as string;
+      const decoded = jwt.verify(token, JWTKey) as {
+        id: number;
+        jwtTokenExpires: number;
+        iat: number;
+      };
+      const userId = decoded.id;
+      const foundUser = findUserByUserId(userId);
+
+      if (foundUser) {
+        const exp = getExpireDateInUnixTimeFormat();
+        const jwtToken = jwt.sign({ id: foundUser.id, exp: exp }, JWTKey);
+
+        res.status(200).send({
+          jwtToken: jwtToken,
+          jwtTokenExpires: exp,
+          data: { id: foundUser.id, username: foundUser.username, posts: foundUser.posts },
+        });
+      }
+    } catch (e) {
+      res.status(401).send('Verify token error');
+    }
+  }
+);
 export default router;

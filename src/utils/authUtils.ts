@@ -13,5 +13,7 @@ export const verifyPassword = async (
   return bcrypt.compare(inputPassword, dbPassword);
 };
 
-const expireDate = add(Date.now(), { days: 7 });
-export const expireDateInUnixTimeFormat = getUnixTime(expireDate);
+export const getExpireDateInUnixTimeFormat = (): number => {
+  const expireDate = add(Date.now(), { days: 7 });
+  return getUnixTime(expireDate);
+};
