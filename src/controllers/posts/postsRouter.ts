@@ -107,21 +107,27 @@ router.get(
       console.log(userId, sortByTime, pageNo);
 
       const database = getDatabase();
+      let result = [...database.posts];
+
+      // filter userId if needed
       if (userId) {
         const foundUser = findUserByUserId(parseInt(userId));
-        if (foundUser) {
-          const filteredPosts = database.posts.filter((post) => foundUser.posts.includes(post.id));
-          const sortedPosts =
-            sortByTime === 'asc'
-              ? filteredPosts.sort((a: Post, b: Post) => a.createdTime - b.createdTime)
-              : filteredPosts; // default is sorted by desc
-          res.status(200).send(sortedPosts);
-        } else {
+        if (!foundUser) {
           res.status(404).send();
+          return;
         }
-      } else {
-        res.status(200).send(database.posts);
+        result = result.filter((post) => foundUser.posts.includes(post.id));
       }
+
+      // sort by time if needed
+      if (sortByTime) {
+        result =
+          sortByTime === 'asc'
+            ? result.sort((a: Post, b: Post) => a.createdTime - b.createdTime)
+            : result; // default is sorted by desc
+      }
+
+      res.status(200).send(result);
     } catch (e) {
       console.log(e);
       res.status(500).send();
