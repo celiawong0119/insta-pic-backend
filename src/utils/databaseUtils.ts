@@ -17,8 +17,6 @@ export const writeToDatabase = (stringifiedData: string) => {
     if (err) {
       throw err;
     }
-
-    console.log('modified DB successfully');
   });
 };
 

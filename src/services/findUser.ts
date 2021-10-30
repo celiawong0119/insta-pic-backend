@@ -5,6 +5,5 @@ export const findUserByUsername = (username: string): IUser | undefined => {
 };
 
 export const findUserByUserId = (userId: number): IUser | undefined => {
-  console.log(database.users);
   return database.users.find((user) => user.id == userId);
 };

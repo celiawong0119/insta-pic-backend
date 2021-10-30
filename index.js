@@ -1,24 +1,17 @@
-const express = require("express");
+const express = require('express');
 const app = express();
-const apiRouter = require("./controllers/apiRouter");
 
 const port = 4000;
 
-let myLogger = function (req, res, next) {
-  console.log("LOGGED");
+app.use(function (req, res, next) {
+  var filename = path.basename(req.url);
+  console.log('The file ' + filename + ' was requested.');
   next();
-};
-
-app.use(myLogger);
-
-// expose public folder to anyone
-app.use(express.static("public"));
-// app.use("/api", apiRouter);
-
-app.get("/user/:id", function (req, res) {
-  res.send("dassda" + req.params.id);
 });
 
+// expose public folder to anyone
+app.use(express.static('public'));
+
 app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`);
+  console.log(`Listening at http://localhost:${port}`);
 });

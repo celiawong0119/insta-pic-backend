@@ -19,6 +19,7 @@ interface GetPostPayload {
   userId: string; // number comes from query are strings
   sortByTime: 'asc' | 'desc';
   pageNo: string; // number comes from query are strings
+  tailId?: string;
 }
 
 const router = express.Router();
@@ -54,7 +55,7 @@ router.post('/upload-image', (req: express.Request, res: express.Response) => {
     if (!fileExtension || !['jpg', 'jpeg', 'png', 'svg'].includes(fileExtension!)) {
       return res.status(422);
     }
-    console.log(fileExtension);
+
     return res.status(200).send(req.file!.filename);
   });
 });
@@ -103,8 +104,8 @@ router.get(
   '/',
   async (req: express.Request<never, never, never, GetPostPayload>, res: express.Response) => {
     try {
-      const { userId, sortByTime, pageNo } = req.query;
-      console.log(userId, sortByTime, pageNo);
+      const { userId, sortByTime, pageNo = '1', tailId } = req.query;
+      const PAGE_SIZE = 5;
 
       const database = getDatabase();
       let result = [...database.posts];
@@ -127,9 +128,13 @@ router.get(
             : result; // default is sorted by desc
       }
 
+      // return data at corresponding page only
+      const sliceStart = tailId ? result.findIndex((item) => item.id === parseInt(tailId)) + 1 : 0;
+      const sliceEnd = tailId ? PAGE_SIZE * parseInt(pageNo) : PAGE_SIZE;
+      result = result.slice(sliceStart, sliceEnd);
+
       res.status(200).send(result);
     } catch (e) {
-      console.log(e);
       res.status(500).send();
     }
   }
