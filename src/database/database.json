@@ -1,1 +1,29 @@
-{"users":[{"id":1,"username":"Tom","password":"$2b$10$PVBRW753vMgju/lSjntcR.PkwsRUOHUpENVhtdENpZoKIao74VRjK","posts":[21,20,19,18,17,16,15,14,13,12,11,10]},{"id":2,"username":"Andus","password":"$2b$10$Q6lrnQkowHMJcMOBdNVMw.fRyJQ4vA3MOb6r82qIzM.ZhWhHcBfCC","posts":[9,8,7,5,4,3,2,1]},{"id":3,"username":"Celia","password":"$2b$10$5JiSzTGxI1VGL6ofCBDRIu75b2mcoT8cAisFwckKdIIRX24dwANGu","posts":[]},{"id":4,"username":"Mandy","password":"$2b$10$Z9RQ/WkY.9FCyQ5gvHqMDOq8l4b4BenBrAcyoo40bMpbrBRhT3AGe","posts":[6]}],"posts":[{"id":21,"imageName":"1635542500740-d5315afd-b96c-4e89-a191-3fcd2efd3d4c.jpg","caption":"ddddd","createdTime":1635542478,"author":{"userId":1,"name":"Tom"}},{"id":20,"imageName":"1635541807839-banner1 1.png","caption":"dwqdqdqwdqdqwqd","createdTime":1635541754,"author":{"userId":1,"name":"Tom"}},{"id":19,"imageName":"1635541497216-banner1 1.png","caption":"dllm","createdTime":1635541354,"author":{"userId":1,"name":"Tom"}},{"id":18,"imageName":"1635541354278-IMG_2289.jpeg","caption":"dddd","createdTime":1635541281,"author":{"userId":1,"name":"Tom"}},{"id":17,"imageName":"1635541280838-IMG_2289.jpeg","caption":"sdad","createdTime":1635541275,"author":{"userId":1,"name":"Tom"}},{"id":16,"imageName":"1635526545297-Email.png","caption":"1234","createdTime":1635526523,"author":{"userId":1,"name":"Tom"}},{"id":15,"imageName":"1635526523136-AboutMeBackground.png","caption":"cccc","createdTime":1635526395,"author":{"userId":1,"name":"Tom"}},{"id":14,"imageName":"1635526394985-AboutMeBalls.png","caption":"qdqwdqwdqwdq","createdTime":1635526156,"author":{"userId":1,"name":"Tom"}},{"id":13,"imageName":"1635526155810-Cloud1.png","caption":"wrsgss","createdTime":1635523475,"author":{"userId":1,"name":"Tom"}},{"id":12,"imageName":"1635523474835-AboutMeBalls.png","caption":"ballball","createdTime":1635523206,"author":{"userId":1,"name":"Tom"}},{"id":11,"imageName":"1635523205863-AirBallon.png","caption":"dsadsa","createdTime":1635522979,"author":{"userId":1,"name":"Tom"}},{"id":10,"imageName":"1635522978983-AboutMeGirl.png","caption":"hi girl","createdTime":1635506969,"author":{"userId":1,"name":"Tom"}},{"id":9,"imageName":"1635506968598-SkillsGirl.png","caption":"Tech girl","createdTime":1635506617,"author":{"userId":2,"name":"Andus"}},{"id":8,"imageName":"1635506617139-ExperienceGraduatedGirl.png","caption":"hoooo","createdTime":1635506486,"author":{"userId":2,"name":"Andus"}},{"id":7,"imageName":"1635506471923-ExperienceWorkingBag.png","caption":"Today is a long day. Keep working...........\n\nnice bag","createdTime":1635502560,"author":{"userId":2,"name":"Andus"}},{"id":6,"imageName":"1635499410619-Mountains.png","caption":"nice day","createdTime":1635499308,"author":{"userId":4,"name":"Mandy"}},{"id":5,"imageName":"1635454980725-Work_from_home.svg","caption":"test2","createdTime":1635454958,"author":{"userId":2,"name":"Andus"}},{"id":4,"imageName":"1635454557112-Group 144.svg","caption":"test","createdTime":1635454536,"author":{"userId":2,"name":"Andus"}},{"id":3,"imageName":"1635454481087-Group 144.svg","caption":"2123131","createdTime":1635454281,"author":{"userId":2,"name":"Andus"}},{"id":2,"imageName":"1635452075581-Howl's Moving Castle.jpg","caption":"dqwdqqdf","createdTime":1635452060,"author":{"userId":2,"name":"Andus"}},{"id":1,"imageName":"1635452060169-Avatar1.jpg","caption":"dqwdq","createdTime":1635451941,"author":{"userId":2,"name":"Andus"}}]}
+{
+  "users": [
+    {
+      "id": 1,
+      "username": "Tom",
+      "password": "$2b$10$PVBRW753vMgju/lSjntcR.PkwsRUOHUpENVhtdENpZoKIao74VRjK",
+      "posts": []
+    },
+    {
+      "id": 2,
+      "username": "Andus",
+      "password": "$2b$10$Q6lrnQkowHMJcMOBdNVMw.fRyJQ4vA3MOb6r82qIzM.ZhWhHcBfCC",
+      "posts": []
+    },
+    {
+      "id": 3,
+      "username": "Celia",
+      "password": "$2b$10$5JiSzTGxI1VGL6ofCBDRIu75b2mcoT8cAisFwckKdIIRX24dwANGu",
+      "posts": []
+    },
+    {
+      "id": 4,
+      "username": "Mandy",
+      "password": "$2b$10$Z9RQ/WkY.9FCyQ5gvHqMDOq8l4b4BenBrAcyoo40bMpbrBRhT3AGe",
+      "posts": []
+    }
+  ],
+  "posts": []
+}

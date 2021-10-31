@@ -1,17 +1,17 @@
-import { generateHashedPassword } from 'src/utils/authUtils';
-import db from 'src/database';
+import { generateHashedPassword } from '../utils/authUtils';
+import db from '../database/db';
 
-export const findUserByUsername = (username: string): IUser | undefined => {
+export const findUserByUsername = (username: string): User | undefined => {
   const database = db.read();
   return database.users.find((user) => user.username === username);
 };
 
-export const findUserByUserId = (userId: number): IUser | undefined => {
+export const findUserByUserId = (userId: number): User | undefined => {
   const database = db.read();
   return database.users.find((user) => user.id == userId);
 };
 
-export const createUser = async (username: string, password: string): Promise<IUser> => {
+export const createUser = async (username: string, password: string): Promise<User> => {
   const database = db.read();
   const hashedPassword = await generateHashedPassword(password);
   const newUser = {

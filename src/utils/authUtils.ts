@@ -16,14 +16,23 @@ export const verifyPassword = async (
   return bcrypt.compare(inputPassword, dbPassword);
 };
 
-// return a response for signup/login/verifyToken api
 export const JWT_KEY = 'JWTKey_insta_pic';
+
+interface jwtTokenPayload {
+  id: number;
+  jwtTokenExpires: number;
+  iat: number;
+}
+export const verifyJwt = (token: string): jwtTokenPayload => {
+  return jwt.verify(token, JWT_KEY) as jwtTokenPayload;
+};
 
 const getExpireDateInUnixTimeFormat = (): number => {
   const expireDate = add(Date.now(), { days: 7 });
   return getUnixTime(expireDate);
 };
 
+// response for signup/login/verifyToken api
 export interface AuthResponse {
   jwtToken: string;
   jwtTokenExpires: number;
@@ -33,7 +42,9 @@ export interface AuthResponse {
     posts: number[];
   };
 }
-export const constructAuthResponseWithJwt = (foundUser: IUser): AuthResponse => {
+
+// construct a response for signup/login/verifyToken api
+export const constructAuthResponseWithJwt = (foundUser: User): AuthResponse => {
   const exp = getExpireDateInUnixTimeFormat();
   const jwtToken = jwt.sign({ id: foundUser.id, exp: exp }, JWT_KEY);
 
