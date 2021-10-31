@@ -16,7 +16,7 @@ app.use(
 
 app.use('/api', apiRouter);
 
-const port = 4000;
+const port = process.env.PORT || 4000;
 app.listen(port, async () => {
   console.log(`Listening at http://localhost:${port}`);
 });

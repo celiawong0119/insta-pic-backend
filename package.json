@@ -4,7 +4,8 @@
   "description": "",
   "scripts": {
     "type-check": "tsc",
-    "start": "nodemon --legacy-watch --exec babel-node --extensions '.js,.ts' -- src/index.ts --keep-file-extension"
+    "start": "nodemon --legacy-watch --exec babel-node --extensions '.js,.ts' -- src/index.ts --keep-file-extension",
+    "live": "PORT=80 yarn start"
   },
   "keywords": [],
   "author": "",
@@ -33,7 +34,6 @@
     "bcrypt": "^5.0.1",
     "cors": "^2.8.5",
     "date-fns": "^2.25.0",
-    "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "fs": "^0.0.1-security",
     "jsonwebtoken": "^8.5.1",
