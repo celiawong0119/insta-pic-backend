@@ -1,34 +1,22 @@
 import express from 'express';
 import jwt from 'jsonwebtoken';
 
-import { findUserByUsername, findUserByUserId } from '../../services/findUser';
+import { findUserByUsername, findUserByUserId, createUser } from '../../services/userServices';
 import {
-  generateHashedPassword,
   verifyPassword,
-  getExpireDateInUnixTimeFormat,
+  constructAuthResponseWithJwt,
+  JWT_KEY,
+  AuthResponse,
 } from '../../utils/authUtils';
-import { getDatabase, writeToDatabase } from '../../utils/databaseUtils';
 
 interface AuthPayload {
   username: string;
   password: string;
 }
 
-interface AuthResponse {
-  jwtToken: string;
-  jwtTokenExpires: number;
-  data: {
-    id: number;
-    username: string;
-    posts: number[];
-  };
-}
-
 type ErrorResponse = string;
 
 const router = express.Router();
-
-export const JWTKey = 'JWTKey_insta_pic';
 
 router.post(
   '/login',
@@ -42,23 +30,13 @@ router.post(
 
       if (foundUser) {
         // user is found
-        if (await verifyPassword(password, foundUser.password)) {
-          const exp = getExpireDateInUnixTimeFormat();
-          const jwtToken = jwt.sign({ id: foundUser.id, exp: exp }, JWTKey);
-
-          // password match
-          res.status(200).send({
-            jwtToken: jwtToken,
-            jwtTokenExpires: exp,
-            data: { id: foundUser.id, username: foundUser.username, posts: foundUser.posts },
-          });
-        } else {
-          // password incorrect
-          res.status(401).send('Incorrect password');
-        }
+        const isPasswordCorrect = await verifyPassword(password, foundUser.password);
+        isPasswordCorrect
+          ? res.status(200).send(constructAuthResponseWithJwt(foundUser))
+          : res.status(401).send('Incorrect password');
       } else {
         // user is not found
-        res.status(404).send('Username not found');
+        res.status(401).send('Username not found');
       }
     } catch (e) {
       console.log(e);
@@ -76,32 +54,14 @@ router.post(
     try {
       const { username, password } = req.body;
       const foundUser = findUserByUsername(username);
-      const database = getDatabase();
 
       if (foundUser) {
-        // user is found
+        // username is found
         res.status(422).send('Username already been used');
       } else {
-        // user is not found
-        const hashedPassword = await generateHashedPassword(password);
-
-        const newUser = {
-          id: database.users.length + 1,
-          username: username,
-          password: hashedPassword,
-          posts: [],
-        };
-        database.users.push(newUser);
-        writeToDatabase(JSON.stringify(database));
-
-        const exp = getExpireDateInUnixTimeFormat();
-        const jwtToken = jwt.sign({ id: newUser.id, exp: exp }, JWTKey);
-
-        res.status(200).send({
-          jwtToken: jwtToken,
-          jwtTokenExpires: exp,
-          data: { id: newUser.id, username: newUser.username, posts: newUser.posts },
-        });
+        // username is not found
+        const newUser = await createUser(username, password);
+        res.status(200).send(constructAuthResponseWithJwt(newUser));
       }
     } catch (e) {
       res.status(500).send('Signup error');
@@ -114,7 +74,7 @@ router.post(
   async (req: express.Request, res: express.Response<AuthResponse | ErrorResponse>) => {
     try {
       const token = req.headers['x-auth-token'] as string;
-      const decoded = jwt.verify(token, JWTKey) as {
+      const decoded = jwt.verify(token, JWT_KEY) as {
         id: number;
         jwtTokenExpires: number;
         iat: number;
@@ -123,14 +83,7 @@ router.post(
       const foundUser = findUserByUserId(userId);
 
       if (foundUser) {
-        const exp = getExpireDateInUnixTimeFormat();
-        const jwtToken = jwt.sign({ id: foundUser.id, exp: exp }, JWTKey);
-
-        res.status(200).send({
-          jwtToken: jwtToken,
-          jwtTokenExpires: exp,
-          data: { id: foundUser.id, username: foundUser.username, posts: foundUser.posts },
-        });
+        res.status(200).send(constructAuthResponseWithJwt(foundUser));
       }
     } catch (e) {
       res.status(401).send('Verify token error');

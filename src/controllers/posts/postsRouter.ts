@@ -2,12 +2,9 @@ import express from 'express';
 import multer from 'multer';
 import path from 'path';
 
-import { findUserByUserId } from '../../services/findUser';
-import {
-  getDatabase,
-  writeToDatabase,
-  currentDateInUnixTimeFormat,
-} from '../../utils/databaseUtils';
+import { findUserByUserId } from '../../services/userServices';
+import { getDatabase, writeToDatabase } from '../../utils/databaseUtils';
+import { getNowInUnixTimeFormat } from '../../utils/dateUtils';
 
 interface CreatePostPayload {
   userId: number;
@@ -84,7 +81,7 @@ router.post(
         id: database.posts.length + 1,
         imageName: imageName,
         caption: caption,
-        createdTime: currentDateInUnixTimeFormat,
+        createdTime: getNowInUnixTimeFormat(),
         author: { userId: foundUser.id, name: foundUser.username },
       };
 
@@ -114,7 +111,7 @@ router.get(
       if (userId) {
         const foundUser = findUserByUserId(parseInt(userId));
         if (!foundUser) {
-          res.status(404).send();
+          res.status(401).send();
           return;
         }
         result = result.filter((post) => foundUser.posts.includes(post.id));

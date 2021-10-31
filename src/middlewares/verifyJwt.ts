@@ -1,6 +1,6 @@
 import express from 'express';
 import jwt from 'jsonwebtoken';
-import { JWTKey } from '../controllers/auth/authRouter';
+import { JWT_KEY } from '../utils/authUtils';
 
 const verifyJwt = async (
   req: express.Request,
@@ -13,7 +13,7 @@ const verifyJwt = async (
     res.status(401).send();
   } else {
     try {
-      jwt.verify(token, JWTKey);
+      jwt.verify(token, JWT_KEY);
       next();
     } catch (e) {
       res.status(401).send();

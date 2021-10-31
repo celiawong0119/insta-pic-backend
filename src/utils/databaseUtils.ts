@@ -1,6 +1,5 @@
 import path from 'path';
 import fs from 'fs';
-import { getUnixTime } from 'date-fns';
 import database from '../database/database.json';
 
 interface IDatabase {
@@ -19,6 +18,3 @@ export const writeToDatabase = (stringifiedData: string) => {
     }
   });
 };
-
-const currentDate = Date.now();
-export const currentDateInUnixTimeFormat = getUnixTime(currentDate);
