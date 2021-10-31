@@ -3,7 +3,7 @@ import multer from 'multer';
 import path from 'path';
 
 import { findUserByUserId } from '../../services/userServices';
-import { getDatabase, writeToDatabase } from '../../utils/databaseUtils';
+import db from '../../database';
 import { getNowInUnixTimeFormat } from '../../utils/dateUtils';
 
 interface CreatePostPayload {
@@ -63,7 +63,7 @@ router.post(
     try {
       const { userId, imageName, caption } = req.body;
 
-      const database = getDatabase();
+      const database = db.read();
 
       if (!imageName || !caption) {
         res.status(422).send();
@@ -89,7 +89,7 @@ router.post(
       database.posts.unshift(newPost);
       foundUser!.posts.unshift(newPost.id);
 
-      writeToDatabase(JSON.stringify(database));
+      db.write(JSON.stringify(database));
       res.status(200).send({ newPostId: newPost.id });
     } catch (e) {
       res.status(500).send();
@@ -104,7 +104,7 @@ router.get(
       const { userId, sortByTime, pageNo = '1', tailId } = req.query;
       const PAGE_SIZE = 5;
 
-      const database = getDatabase();
+      const database = db.read();
       let result = [...database.posts];
 
       // filter userId if needed
