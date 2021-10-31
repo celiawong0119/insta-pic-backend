@@ -1,6 +1,8 @@
 import express from 'express';
 import cors from 'cors';
 import apiRouter from './controllers/apiRouter';
+import https from 'https';
+import fs from 'fs';
 
 const app = express();
 app.use(express.json());
@@ -16,7 +18,24 @@ app.use(
 
 app.use('/api', apiRouter);
 
-const port = process.env.PORT || 4000;
-app.listen(port, async () => {
-  console.log(`Listening at http://localhost:${port}`);
-});
+console.log('NODE_ENV =', process.env.NODE_ENV);
+console.log(__dirname + '/../selfsigned.key');
+if (process.env.NODE_ENV === 'production') {
+  const port = 80;
+  let key = fs.readFileSync(__dirname + '/../certs/selfsigned.key');
+  let cert = fs.readFileSync(__dirname + '/../certs/selfsigned.crt');
+  let options = {
+    key: key,
+    cert: cert,
+  };
+
+  let server = https.createServer(options, app);
+  server.listen(port, () => {
+    console.log('server starting on port : ' + port);
+  });
+} else {
+  const port = 4000;
+  app.listen(port, () => {
+    console.log('server starting on port : ' + port);
+  });
+}
