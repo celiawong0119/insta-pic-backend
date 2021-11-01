@@ -5,7 +5,7 @@
   "scripts": {
     "type-check": "tsc",
     "start": "nodemon --legacy-watch --exec babel-node --extensions '.js,.ts' -- src/index.ts --keep-file-extension",
-    "live": "NODE_ENV=production npm start"
+    "live": "PORT=80 npm start"
   },
   "keywords": [],
   "author": "",
