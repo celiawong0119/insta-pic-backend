@@ -19,8 +19,6 @@ export const createPost = (author: User, imageName: string, caption: string): Po
   // store post into db with desc order
   database.posts.unshift(newPost);
   author.posts.unshift(newPost.id);
-  console.log(author);
-  console.log(database);
   db.write(JSON.stringify(database));
   return newPost;
 };

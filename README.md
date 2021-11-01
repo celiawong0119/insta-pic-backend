@@ -72,7 +72,14 @@ This api is used for creating the actual post record
 | imageName | string | true     |
 | caption   | string | true     |
 
-Response Code 200: OK
+{ newPostId: newPost.id }
+Response Code 200: OK , example value:
+
+```
+{
+  "newPostId": 1
+}
+```
 
 ### Log in
 
