@@ -1,10 +1,12 @@
 # Getting Started with InstaPic backend
 
-## Installation and run frontend on localhost:4000
+## Installation and run backend on localhost:4000
 
-### `yarn install` / `npm install`
+### `yarn install && yarn start`
 
-### `yarn start` / `npm start`
+or
+
+### `npm install && npm start`
 
 ## API reference
 
