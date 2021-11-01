@@ -72,7 +72,6 @@ This api is used for creating the actual post record
 | imageName | string | true     |
 | caption   | string | true     |
 
-{ newPostId: newPost.id }
 Response Code 200: OK , example value:
 
 ```
@@ -133,7 +132,7 @@ Response Code 200: OK , example value:
 
 ##### POST /api/auth/verifyToken
 
-If there is a token, user will access to the home / profile page. If not, the page will redirect to the log in page.
+Return an updated token if succeed
 
 | header       | type   | required |
 | ------------ | ------ | -------- |
