@@ -4,9 +4,9 @@ import { findUserByUserId } from '../../services/userServices';
 import { getAllPosts } from '../../services/postServices';
 
 interface GetPostPayload {
-  userId: string; // number comes from query are strings
-  sortByTime: 'asc' | 'desc';
-  pageNo: string; // number comes from query are strings
+  userId?: string; // number comes from query are strings
+  sortByTime?: 'asc' | 'desc';
+  pageNo?: string; // number comes from query are strings
   tailId?: string;
 }
 
@@ -15,7 +15,7 @@ const getPost = async (
   res: express.Response
 ) => {
   try {
-    const { userId, sortByTime, pageNo = '1', tailId } = req.query;
+    const { userId, sortByTime = 'desc', pageNo = '1', tailId } = req.query;
     const PAGE_SIZE = 5;
 
     let result = getAllPosts();
@@ -30,12 +30,9 @@ const getPost = async (
       result = result.filter((post) => foundUser.posts.includes(post.id));
     }
 
-    // sort by time if needed
-    if (sortByTime) {
-      result =
-        sortByTime === 'asc'
-          ? result.sort((a: Post, b: Post) => a.createdTime - b.createdTime)
-          : result; // default is sorted by desc
+    // sort by time if needed, default is desc
+    if (sortByTime === 'asc') {
+      result = result.sort((a: Post, b: Post) => a.createdTime - b.createdTime);
     }
 
     // return data at corresponding page only
