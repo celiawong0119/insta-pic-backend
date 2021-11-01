@@ -8,6 +8,8 @@
 
 ## API reference
 
+### Get posts
+
 ##### GET /posts/
 
 | param      | type            | required |
@@ -16,6 +18,8 @@
 | sortByTime | 'asc' or 'desc' | false    |
 | pageNo     | string          | false    |
 | tailId     | string          | false    |
+
+### Create a post
 
 ##### To create a post: first call `POST /posts/upload-image/`, then call `POST /posts/`
 
