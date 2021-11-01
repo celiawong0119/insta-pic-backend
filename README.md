@@ -54,11 +54,15 @@ This api is used for passing the image file into the public folder
 | --- | -------- | -------- |
 | -   | FormData | true     |
 
-Response Code 200: OK
+Response Code 200: OK , example value:
+
+```
+1635695915276-Avatar1.jpg
+```
 
 ##### POST /api/posts/
 
-This api is used for passing the image information into the database.json
+This api is used for creating the actual post record
 
 ###### JWT Token is required
 
