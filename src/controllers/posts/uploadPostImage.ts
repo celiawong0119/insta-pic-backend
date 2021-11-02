@@ -16,23 +16,23 @@ const uploadPostImage = (req: express.Request, res: express.Response) => {
   upload(req, res, (err) => {
     if (err) {
       console.log(err);
-      return res.status(500);
+      return res.status(500).send();
     }
 
     // file should exist
-    if (!req.file) {
-      return res.status(422);
+    if (!req.file && req.file!.filename) {
+      return res.status(422).send();
     }
 
     // file should be smaller than 3MB (3145728 bytes)
     if (req.file!.size > 3145728) {
-      return res.status(422);
+      return res.status(422).send();
     }
 
     // file should contain image extensions
     const fileExtension = path.extname(req.file!.filename).split('.').pop();
-    if (!fileExtension || !['jpg', 'jpeg', 'png', 'svg'].includes(fileExtension!)) {
-      return res.status(422);
+    if (!fileExtension || !['jpg', 'jpeg', 'png', 'svg'].includes(fileExtension.toLowerCase())) {
+      return res.status(422).send();
     }
 
     return res.status(200).send(req.file!.filename);
