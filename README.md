@@ -8,6 +8,30 @@ or
 
 ### `npm install && npm start`
 
+## Available features
+
+### Requirements
+
+- [x] Implement a RESTful backend API with NodeJS
+- [x] Users can register by username, password
+- [x] Logged In users can submit a post that includes an image and short text description
+- [x] Logged In users can get a list of uploaded posts
+- [x] Validation and error handling
+- [x] Automated tests
+
+### Optional
+
+- [x] Can sort all posts by time created, or filter posts by a specific user.
+- [x] Performance optimization
+- [x] Pagination
+
+## Deliverable
+
+- [x] Production URL (Digital Ocean)
+- [x] Source code (Github)
+- [x] Documentation on how to run the source code (this README file)
+- [x] Documentation on your API (this README file)
+
 ## API reference
 
 ### Get posts
