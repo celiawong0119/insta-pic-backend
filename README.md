@@ -1,5 +1,17 @@
 # Getting Started with InstaPic backend
 
+## Production URL
+
+http://188.166.243.138
+
+## Installation and run backend on localhost:4000
+
+### `yarn install && yarn start`
+
+or
+
+### `npm install && npm start`
+
 ## Available features
 
 ### Requirements
@@ -172,11 +184,3 @@ Response Code 200: OK , example value:
   }
 }
 ```
-
-## Installation and run backend on localhost:4000
-
-### `yarn install && yarn start`
-
-or
-
-### `npm install && npm start`
