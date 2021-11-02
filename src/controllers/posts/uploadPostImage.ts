@@ -15,6 +15,7 @@ const upload = multer({ storage: storage }).single('file');
 const uploadPostImage = (req: express.Request, res: express.Response) => {
   upload(req, res, (err) => {
     if (err) {
+      console.log(err);
       return res.status(500);
     }
 

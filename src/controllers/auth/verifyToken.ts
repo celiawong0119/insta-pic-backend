@@ -19,6 +19,7 @@ const verifyToken = async (
       ? res.status(200).send(constructAuthResponseWithJwt(foundUser))
       : res.status(401).send('Verify token error');
   } catch (e) {
+    console.log(e);
     res.status(401).send('Verify token error');
   }
 };

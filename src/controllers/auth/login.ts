@@ -27,6 +27,7 @@ const login = async (
       res.status(401).send('Username not found');
     }
   } catch (e) {
+    console.log(e);
     res.status(500).send('Login error');
   }
 };
