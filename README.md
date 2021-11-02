@@ -22,7 +22,7 @@
 - [x] Production URL (Digital Ocean)
 - [x] Source code (Github)
 - [x] Documentation on how to run the source code (this README file)
-- [x] Documentation on your API (this README file)
+- [x] Documentation on API (this README file)
 
 ## API reference
 
