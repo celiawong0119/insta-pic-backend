@@ -2,6 +2,11 @@ import express from 'express';
 
 import { findUserByUserId } from '../../services/userServices';
 import { getAllPosts } from '../../services/postServices';
+import {
+  filterPostsByUser,
+  getPostsByPage,
+  sortPostsByAscendingOrder,
+} from '../../utils/postUtils';
 
 interface GetPostPayload {
   userId?: string; // number comes from query are strings
@@ -28,19 +33,17 @@ const getPost = async (
         res.status(401).send();
         return;
       }
-      result = result.filter((post) => foundUser.posts.includes(post.id));
+      result = filterPostsByUser(foundUser, result);
       authorName = foundUser.username;
     }
 
     // sort by time if needed, default is desc
     if (sortByTime === 'asc') {
-      result = result.sort((a: Post, b: Post) => a.createdTime - b.createdTime);
+      result = sortPostsByAscendingOrder(result);
     }
 
     // return data at corresponding page only
-    const sliceStart = tailId ? result.findIndex((item) => item.id === parseInt(tailId)) + 1 : 0;
-    const sliceEnd = tailId ? PAGE_SIZE * parseInt(pageNo) : PAGE_SIZE;
-    result = result.slice(sliceStart, sliceEnd);
+    result = getPostsByPage(result, pageNo, tailId);
 
     res.status(200).send({ authorName: authorName, posts: result });
   } catch (e) {
