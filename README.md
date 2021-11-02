@@ -12,6 +12,10 @@ or
 
 ### `npm install && npm start`
 
+## Test
+
+### `yarn test` or `npm run test`
+
 ## Available features
 
 ### Requirements
@@ -25,7 +29,7 @@ or
 
 ### Optional
 
-- [x] Can sort all posts by time created, or filter posts by a specific user.
+- [x] Can sort all posts by time created, or filter posts by a specific user
 - [x] Performance optimization
 - [x] Pagination
 
