@@ -26,18 +26,21 @@ or
 Response Code 200: OK , example value:
 
 ```
-[
-  {
-    "id": 1,
-    "imageName": "1635695915276-Avatar1.jpg",
-    "caption": "b jai",
-    "createdTime": 1635695915,
-    "author": {
-      "userId": 1,
-      "name": "Tom"
+{
+  authorName: "Tom,
+  posts:[
+    {
+      "id": 1,
+      "imageName": "1635695915276-Avatar1.jpg",
+      "caption": "b jai",
+      "createdTime": 1635695915,
+      "author": {
+        "userId": 1,
+        "name": "Tom"
+      }
     }
-  }
-]
+  ]
+}
 ```
 
 ### Create a post

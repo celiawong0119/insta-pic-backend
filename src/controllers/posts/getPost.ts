@@ -21,6 +21,7 @@ const getPost = async (
     let result = getAllPosts();
 
     // filter userId if needed
+    let authorName;
     if (userId) {
       const foundUser = findUserByUserId(parseInt(userId));
       if (!foundUser) {
@@ -28,6 +29,7 @@ const getPost = async (
         return;
       }
       result = result.filter((post) => foundUser.posts.includes(post.id));
+      authorName = foundUser.username;
     }
 
     // sort by time if needed, default is desc
@@ -40,7 +42,7 @@ const getPost = async (
     const sliceEnd = tailId ? PAGE_SIZE * parseInt(pageNo) : PAGE_SIZE;
     result = result.slice(sliceStart, sliceEnd);
 
-    res.status(200).send(result);
+    res.status(200).send({ authorName: authorName, posts: result });
   } catch (e) {
     console.log(e);
     res.status(500).send();
