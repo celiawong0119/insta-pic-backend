@@ -9,6 +9,7 @@ function resetDatabase() {
     }
   });
 
+  // reference: https://stackoverflow.com/questions/27072866/how-to-remove-all-files-from-directory-without-removing-directory-in-node-js
   const imagePath = path.join(__dirname, './public');
   fs.readdir(imagePath, (err, files) => {
     if (err) throw err;
