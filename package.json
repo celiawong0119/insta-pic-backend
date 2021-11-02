@@ -3,11 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "type-check": "tsc",
-    "test": "jest",
     "start": "nodemon --legacy-watch --exec babel-node --extensions '.js,.ts' -- src/index.ts --keep-file-extension",
     "live": "PORT=80 npm start",
-    "deploy": "PORT=80 babel-node --extensions '.js,.ts' -- src/index.ts --keep-file-extension"
+    "test": "jest",
+    "seed": "node seed.js"
   },
   "keywords": [],
   "author": "",
