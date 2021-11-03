@@ -6,8 +6,6 @@ const app = express();
 app.use(express.json());
 app.use(express.static('public'));
 
-// set up cors for dev to "Origin is not allowed by Access-Control-Allow-Origin" error
-// use white list for production
 app.use(
   cors({
     exposedHeaders: ['x-auth-token'],

@@ -32,7 +32,6 @@ const createPostContent = async (
 
     res.status(200).send({ newPostId: newPost.id });
   } catch (e) {
-    console.log(e);
     res.status(500).send();
   }
 };

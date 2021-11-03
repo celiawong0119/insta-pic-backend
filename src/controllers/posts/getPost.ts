@@ -12,7 +12,7 @@ interface GetPostPayload {
   userId?: string; // number comes from query are strings
   sortByTime?: 'asc' | 'desc';
   pageNo?: string; // number comes from query are strings
-  tailId?: string;
+  tailId?: string; // number comes from query are strings
 }
 
 const getPost = async (
@@ -47,7 +47,6 @@ const getPost = async (
 
     res.status(200).send({ authorName: authorName, posts: result });
   } catch (e) {
-    console.log(e);
     res.status(500).send();
   }
 };
