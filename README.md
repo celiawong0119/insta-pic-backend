@@ -2,7 +2,8 @@
 
 ## Production URL
 
-http://188.166.243.138
+https://instapic.celiawongwsy.com
+// http://188.166.243.138
 
 ## Installation and run backend on localhost:4000
 
